@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js">
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -79,6 +79,18 @@
         'Thanks for logging in, ' + response.name + '!';
     });
   }
+  
+  Kakao.init('8a0eb548cc8e4502f32642ba5c48cb47');
+    // 카카오 로그인 버튼을 생성합니다.
+    Kakao.Auth.createLoginButton({
+      container: '#kakao-login-btn',
+      success: function(authObj) {
+        alert(JSON.stringify(authObj));
+      },
+      fail: function(err) {
+         alert(JSON.stringify(err));
+      }
+    });
 </script>
 
 <!--
