@@ -1,0 +1,135 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+
+<script type="text/javascript">
+
+<!--
+
+//공식 트위터
+
+function twitterCallbackJarMaster(twitters) {
+
+	var statusHTML = [];
+
+	for (var i = 0; i < twitters.length; i++) {
+
+		var donHtml = '';
+
+		var userName = twitters[i].user.screen_name;
+
+		var userImg =  	twitters[i].user.profile_image_url;
+
+		
+
+		var status = twitters[i].text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url) {
+
+		      return '<a href="'+url+'">'+url+'</a>';
+
+		    }).replace(/\B@([_a-z0-9]+)/ig, function(reply) {
+
+		      return  reply.charAt(0)+'<a href="http://twitter.com/'+reply.substring(1)+'" target="_blank">'+reply.substring(1)+'</a>';
+
+		    });
+
+		donHtml += '<li>';
+
+		donHtml += '	<div><a href="http://twitter.com/' + userName + '" target="_blank"><img src="' + userImg + '" width="65" height="48" alt=""></a></div>';
+
+		donHtml += '	<strong>' + userName + '</strong>';
+
+		donHtml += '	<span>' + status + '</span>';
+
+		donHtml += '</li>';
+
+
+
+		
+
+		statusHTML.push(donHtml);
+
+		if(i==1) break;
+
+	}
+
+	
+
+	document.getElementById('publicTwitterId').innerHTML = statusHTML.join('');;
+
+}
+
+
+
+function twitterCallbackJarMaster2(twitters) {
+
+	var statusHTML = [];
+
+	
+
+	for (var i = 0; i < 2; i++) {
+
+		var donHtml = '';
+
+		var userName = twitters[i].retweeted_status.user.screen_name;
+
+		var userImg =  	twitters[i].retweeted_status.user.profile_image_url;
+
+		
+
+		var status = twitters[i].text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url) {
+
+		      return '<a href="'+url+'">'+url+'</a>';
+
+		    }).replace(/\B@([_a-z0-9]+)/ig, function(reply) {
+
+		      return  reply.charAt(0)+'<a href="http://twitter.com/'+reply.substring(1)+'" target="_blank">'+reply.substring(1)+'</a>';
+
+		    });
+
+		
+
+//		status = '<strong><a href="http://twitter.com/' + userName + '" target="_blank">@' + userName + '</a></strong> ' + status; 
+
+		doneHtml = '<dl>';
+
+	    doneHtml += '<dd class="thum"><a href="http://twitter.com/' + userName + '" target="_blank"><img src="' + userImg + '" alt=""></a></dd>';
+
+		doneHtml += '<dd class="txt">' + status + '</dd>';
+
+		doneHtml += '</dl>';
+
+		
+
+		statusHTML.push(doneHtml);
+
+	}
+
+	
+
+	document.getElementById('peopleTwitterId').innerHTML = statusHTML.join('');
+
+}
+
+
+
+function twitterRefresh() {
+
+	
+
+}
+
+-->
+
+</script>
+
+
+
+<div class="aside_twitter">
+
+	<h2>공식 트위터</h2>
+
+	<ul id="publicTwitterId">
+
+	</ul>
+
+	<script type="text/javascript" src="https://api.twitter.com/1/statuses/user_timeline/jarMaster.json?callback=twitterCallbackJarMaster&include_entities=true&screen_name=jarMaster&include_rts=false&count=10"></script>
+
+</div>
